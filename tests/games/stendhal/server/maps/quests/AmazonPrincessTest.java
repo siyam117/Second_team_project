@@ -12,7 +12,9 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static utilities.SpeakerNPCTestHelper.getReply;
 
@@ -141,6 +143,8 @@ public class AmazonPrincessTest {
 		assertEquals("Goodbye, and beware of the barbarians.", getReply(npc));
 
 		// -----------------------------------------------
+		final int xp = player.getXP();
+		
 		final Item item = ItemTestHelper.createItem("pina colada");
 		player.getSlot("bag").add(item);
 
@@ -149,6 +153,7 @@ public class AmazonPrincessTest {
 		en.step(player, "pina colada");
 		assertTrue(getReply(npc).startsWith("Thank you!! Take th"));
 		assertTrue(player.isEquipped("fish pie"));
+		assertThat(player.getXP(), greaterThan(xp));
 		en.step(player, "bye");
 		assertEquals("Goodbye, and beware of the barbarians.", getReply(npc));
 

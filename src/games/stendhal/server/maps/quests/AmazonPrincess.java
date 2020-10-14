@@ -26,10 +26,12 @@ import games.stendhal.server.entity.npc.EventRaiser;
 import games.stendhal.server.entity.npc.SpeakerNPC;
 import games.stendhal.server.entity.npc.action.DropItemAction;
 import games.stendhal.server.entity.npc.action.EquipItemAction;
+import games.stendhal.server.entity.npc.action.IncreaseXPAction;
 import games.stendhal.server.entity.npc.action.InflictStatusOnNPCAction;
 import games.stendhal.server.entity.npc.action.MultipleActions;
 import games.stendhal.server.entity.npc.action.SayTimeRemainingAction;
 import games.stendhal.server.entity.npc.action.SetQuestAndModifyKarmaAction;
+import games.stendhal.server.entity.npc.action.SetQuestAction;
 import games.stendhal.server.entity.npc.condition.AndCondition;
 import games.stendhal.server.entity.npc.condition.NotCondition;
 import games.stendhal.server.entity.npc.condition.PlayerHasItemWithHimCondition;
@@ -60,7 +62,7 @@ import games.stendhal.server.maps.Region;
  *
  * REWARD:
  * <ul>
- * <li>Karma +25 in all</li>
+ * <li>500 XP</li>
  * <li>Some fish pie, random between 2 and 7.</li>
  * </ul>
  *
@@ -118,7 +120,7 @@ npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.YES_MESSAGES, null,
 				ConversationStates.ATTENDING,
 				"Thank you! If you have found some, say #drink to me so I know you have it. I'll be sure to give you a nice reward.",
-				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 3));
+				new SetQuestAction(QUEST_SLOT, "start"));
 
 		// Player says no, they've lost karma.
 		npc.add(ConversationStates.QUEST_OFFERED,
@@ -140,6 +142,7 @@ npc.add(ConversationStates.ATTENDING,
 			ConversationStates.ATTENDING,
 			null,
 			new MultipleActions(
+						new IncreaseXPAction(500),
 						new DropItemAction("pina colada"),
 						new ChatAction() {
 							@Override
@@ -152,8 +155,8 @@ npc.add(ConversationStates.ATTENDING,
 										Grammar.thisthese(pieAmount) + " " +
 										Grammar.quantityplnoun(pieAmount, "fish pie", "") +
 										" from my cook, and this kiss, from me.");
-								new SetQuestAndModifyKarmaAction(getSlotName(), "drinking;"
-																 + System.currentTimeMillis(), 15.0).fire(player, sentence, npc);
+								new SetQuestAction(getSlotName(), "drinking;"
+																 + System.currentTimeMillis()).fire(player, sentence, npc);
 							}
 						},
 						new InflictStatusOnNPCAction("pina colada")
