@@ -66,6 +66,11 @@ public abstract class Pet extends DomesticAnimal {
 	 * Approximately how much slower he gets hungry if he's full weight.
 	 */
 	public final int FAT_FACTOR = 5;
+	
+	/**
+	 * When below this HP the pet will use medicines.
+	 */
+	public final int HEALING_THRESHOLD = 100;
 
 	protected List<String> foodName = getFoodNames();
 
@@ -198,6 +203,10 @@ public abstract class Pet extends DomesticAnimal {
 	boolean canHeal(final Item i) {
 		return medicineName.contains(i.getName());
 	}
+	
+	boolean shouldHeal() {
+		return getHP() < getBaseHP() && getHP() < HEALING_THRESHOLD;
+	}
 
 	private void eat(final Item food) {
 		if (weight < MAX_WEIGHT) {
@@ -212,7 +221,7 @@ public abstract class Pet extends DomesticAnimal {
 	}
 
 	private void drink(final ConsumableItem medicine) {
-		if (getHP() < getBaseHP()) {
+		if (shouldHeal()) {
 			// directly increase the pet's health points
 			heal(((ConsumableItem) medicine.splitOff(1)).getAmount(), true);
 			medicine.removeOne();
@@ -279,7 +288,7 @@ public abstract class Pet extends DomesticAnimal {
 
 		//drinking logic
 		boolean busyWithHealing = false;
-		if (getHP() < getBaseHP()) {
+		if (shouldHeal()) {
 			busyWithHealing = logicHealing();
 		}
 
