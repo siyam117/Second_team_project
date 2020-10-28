@@ -266,6 +266,7 @@ public class IcecreamForAnnie extends AbstractQuest {
 					ConversationStates.ATTENDING, "Hello, nice to meet you.",
 					null);
 
+		
 		// player is supposed to begetting ice cream
 		mummyNPC.add(ConversationStates.IDLE,
 					ConversationPhrases.GREETING_MESSAGES,
@@ -275,11 +276,13 @@ public class IcecreamForAnnie extends AbstractQuest {
 					"Hello, I see you've met my daughter Annie. I hope she wasn't too demanding. You seem like a nice person.",
 					new SetQuestAction(QUEST_SLOT, "mummy"));
 
+		
 		// any other state
 		mummyNPC.add(ConversationStates.IDLE,
 					ConversationPhrases.GREETING_MESSAGES,
 					new GreetingMatchesNameCondition(mummyNPC.getName()), true,
 					ConversationStates.ATTENDING, "Hello again.", null);
+
 	}
 
 	@Override

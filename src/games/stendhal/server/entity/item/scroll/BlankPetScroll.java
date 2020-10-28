@@ -59,6 +59,11 @@ public class BlankPetScroll extends Scroll {
 	 */
 	@Override
 	protected boolean useScroll(final Player player) {
+		//issue resolved
+		if(!player.hasPet()) {
+			player.sendPrivateText("Your pet is already in a scroll.");
+			return false;
+		}
 		final StendhalRPZone zone = player.getZone();
 		final String petName = player.getPet().getName();
 
@@ -70,15 +75,18 @@ public class BlankPetScroll extends Scroll {
 
 			final Pet pet = player.getPet();
 
-
 			if (pet != null) {
 				//petOwner.storePet(pet);
 				player.removePet(pet);
 				pet.getZone().remove(pet);
 				player.sendPrivateText("Amazingly your pet melds with the scroll. It just walked right into the page!");
+				return true;
 			}
-
-			return true;
+			
+			
+		return true;
+		
+		
 		} else {
 			player.sendPrivateText("The strong anti magic aura in this area prevents the scroll from working!");
 			return false;
