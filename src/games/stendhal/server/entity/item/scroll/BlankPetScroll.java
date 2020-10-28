@@ -59,6 +59,7 @@ public class BlankPetScroll extends Scroll {
 	 */
 	@Override
 	protected boolean useScroll(final Player player) {
+		//issue resolved
 		if(!player.hasPet()) {
 			player.sendPrivateText("Your pet is already in a scroll.");
 			return false;

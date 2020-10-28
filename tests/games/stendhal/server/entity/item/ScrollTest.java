@@ -18,9 +18,6 @@ import static games.stendhal.common.constants.Actions.BASESLOT;
 
 
 public class ScrollTest{
-	//private static final String BASEITEM = null;
-	//private static final String BASEOBJECT = null;
-	//private static final String BASESLOT = null;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception{
