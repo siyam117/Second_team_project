@@ -26,6 +26,7 @@ import org.junit.Test;
 
 import games.stendhal.common.parser.ConversationParser;
 import games.stendhal.common.parser.Sentence;
+import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.mapstuff.chest.Chest;
 import games.stendhal.server.entity.mapstuff.chest.StoredChest;
@@ -102,6 +103,16 @@ public class BuyHouseChatActionTest {
 		chest = new StoredChest();
 		ados.add(chest);
 		HouseUtilities.clearCache();
+		
+		// arrange 
+		games.stendhal.server.entity.item.Item item1 = SingletonRepository.getEntityManager().getItem("sword");
+		chest.add(item1);
+		games.stendhal.server.entity.item.Item item2 = SingletonRepository.getEntityManager().getItem("potion");
+		chest.add(item2);
+		games.stendhal.server.entity.item.Item item3 = SingletonRepository.getEntityManager().getItem("wooden bow");
+		chest.add(item3);
+		games.stendhal.server.entity.item.Item item4 = SingletonRepository.getEntityManager().getItem("cheese");
+		chest.add(item4);
 
 		SpeakerNPC engine = new SpeakerNPC("bob");
 		EventRaiser raiser = new EventRaiser(engine);
@@ -122,5 +133,18 @@ public class BuyHouseChatActionTest {
 		assertThat(getReply(engine), containsString("Congratulation"));
 		assertFalse(player.isEquipped("money"));
 	}
-
+	
+	/**
+	 * test for empty chest
+	 */
+	
+	@Test
+	public void chestTest() {
+		testFire();
+		//assert
+		assertThat(HouseUtilities.findChest(housePortal).size(),is(3));
+		
+	}
 }
+
+

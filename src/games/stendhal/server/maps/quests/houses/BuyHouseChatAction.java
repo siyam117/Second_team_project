@@ -14,7 +14,11 @@ import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationStates;
 import games.stendhal.server.entity.npc.EventRaiser;
 import games.stendhal.server.entity.player.Player;
+import marauroa.common.game.RPObject;
+import marauroa.common.game.RPSlot;
 import marauroa.common.game.SlotIsFullException;
+import java.util.Iterator;
+
 
 final class BuyHouseChatAction extends HouseChatAction implements ChatAction {
 
@@ -69,6 +73,9 @@ final class BuyHouseChatAction extends HouseChatAction implements ChatAction {
 					player.drop("money", cost);
 					// remember what house they own
 					player.setQuest(questslot, itemName);
+					
+					//Remove any existing items in the chest of there exists any
+					BuyHouseChatAction.emptyChest(HouseUtilities.findChest(houseportal), houseportal.getDoorId());
 
 					// put nice things and a helpful note in the chest
 					BuyHouseChatAction.fillChest(HouseUtilities.findChest(houseportal), houseportal.getDoorId());
@@ -114,5 +121,15 @@ final class BuyHouseChatAction extends HouseChatAction implements ChatAction {
 		} catch (SlotIsFullException e) {
 			Logger.getLogger(BuyHouseChatAction.class).info("Could not add " + item.getName() + " to chest in " + id, e);
 		}
+	}
+	public static void emptyChest(final StoredChest chest, String id) {
+		Iterator<RPObject> iterator = chest.getContent();
+		while(iterator.hasNext()) { 
+			Iterator<RPObject> iterator1 = chest.getContent();
+			final RPSlot chestContent = chest.getSlot("content");
+			chestContent.remove(iterator1.next().getID());
+	
+		}
+			
 	}
 }
