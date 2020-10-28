@@ -167,6 +167,25 @@ Authors of Stendhal are:
   · Bugs fixer
   - Diligent Dodo (aka Soniccuz)
   · Artist (mimic, dodo, suba diving concepts)
+- Angela Popovska
+  · Bugs fixer
+  · Testing
+- Lyra O'Leary
+  · Bugs fixer
+  · Testing
+- Matthew Horrocks
+  · Bugs fixer
+  · Testing
+- Karin Tange
+  · Bugs fixer
+  · Testing
+- Siyam Muhammad
+  · Bugs fixer
+  · Testing
+- Kaiwei Guo
+  · Bugs fixer
+  · Testing
+  · Release 1.35uom
 
 We also thank many who have contributed to Stendhal by providing patches,
 which the rest of the team commited on their behalf.

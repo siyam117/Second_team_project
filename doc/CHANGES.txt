@@ -2,6 +2,22 @@ Changelog
 ---------
 ---------
 
+1.35uom
+
+*bug fixes*
+- Chest is cleared apart from welcome gifts
+- Amended BuyHouseChatActionTest.java to check for unwanted items in chest  
+- Empty pet scrolls don't disappear if the player doesn't have a pet
+- Added a test class ScrollTest.java to check the presence of unused scroll
+- Pets do not drink potions if their health is 100 or more
+- Added test class PetTest.java to highlight the above bug
+- Princess escalara quest gives XP
+- Amended test class AmazonPrincessTest.java to reflect changes
+- Corrected the typo in the chief dialogue (Patrick speaking)
+- Added test class ChiefNPCTest.java for the above mentioned dialogue
+- Speed of all similar classes of dwarves under lv30 significantly slower than others
+- Added test to checking speed of dwarves under lv30
+
 1.35
 
 *world*
