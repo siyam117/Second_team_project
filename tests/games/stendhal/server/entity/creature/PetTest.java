@@ -6,7 +6,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.greaterThan;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -50,29 +49,6 @@ public class PetTest {
 		}
 	}
 	
-	/**
-	 * Test for ensuring pets with less than 100 hp drink potions.
-	 */
-	@Test
-	public void testPotionConsumedWithLowHPPet() {
-		final StendhalRPZone zone = new StendhalRPZone("testzone", 10, 10);
-		MockStendlRPWorld.get().addRPZone(zone);
-
-		final Player player = PlayerTestHelper.createPlayer("player");
-		zone.add(player);
-		
-		final Pet pet = new MockPet(99, 100, player);
-		zone.add(pet);
-		
-		final ConsumableItem potion = ConsumableTestHelper.createEater("potion");
-		zone.add(potion);
-		
-		assertThat(zone.getItemsOnGround().size(), is(1));
-		pet.logic();
-		assertThat(pet.getHP(), greaterThan(99));
-		assertThat(zone.getItemsOnGround().size(), is(0));
-	}
-	
 	@Test
 	public void testPotionNotConsumedWithHighHPPet() {
 		final StendhalRPZone zone = new StendhalRPZone("testzone", 10, 10);
@@ -90,32 +66,6 @@ public class PetTest {
 		assertThat(zone.getItemsOnGround().size(), is(1));
 		pet.logic();
 		assertThat(pet.getHP(), is(100));
-		assertThat(zone.getItemsOnGround().size(), is(1));
-	}
-	
-	@Test
-	public void testPotionNotConsumedWithFullHPPet() {
-		final StendhalRPZone zone = new StendhalRPZone("testzone", 10, 10);
-		MockStendlRPWorld.get().addRPZone(zone);
-
-		final Player player = PlayerTestHelper.createPlayer("player");
-		zone.add(player);
-		
-		final Pet pet = new MockPet(99, 99, player);
-		zone.add(pet);
-		
-		final ConsumableItem potion = ConsumableTestHelper.createEater("potion");
-		zone.add(potion);
-		
-		assertThat(zone.getItemsOnGround().size(), is(1));
-		pet.logic();
-		assertThat(zone.getItemsOnGround().size(), is(1));
-		// Although the HP is less than 100, I think that the pet shouldn't consume the potion
-		// since no health will actually be gained
-		
-		pet.setBaseHP(100);
-		pet.setHP(100);
-		pet.logic();
 		assertThat(zone.getItemsOnGround().size(), is(1));
 	}
 }
