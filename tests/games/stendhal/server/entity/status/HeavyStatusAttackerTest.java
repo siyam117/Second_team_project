@@ -1,8 +1,8 @@
 package games.stendhal.server.entity.status;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -86,6 +86,23 @@ public class HeavyStatusAttackerTest {
 		StendhalRPAction.startAttack(player, victim);
 		assertTrue(victim.hasStatus(StatusType.HEAVY));
 	}
+	
+	@Test
+	public void testHeavyStatusAttacker() {
+		
+		final HeavyStatusAttacker attacker = new HeavyStatusAttacker(null, 100);
+		attacker.onAttackAttempt(victim, SingletonRepository.getEntityManager().getCreature("snake"));
+		assertTrue(victim.hasStatus(StatusType.HEAVY));
+	}
+
+	@Test
+	public void testHeavyStatusAttackerProbabilityZero() {
+		
+		final HeavyStatusAttacker attacker = new HeavyStatusAttacker(null, 0); //this one passes
+		attacker.onAttackAttempt(victim, SingletonRepository.getEntityManager().getCreature("snake"));
+		assertFalse(victim.hasStatus(StatusType.HEAVY));
+	}
+	
 	
 }
 
