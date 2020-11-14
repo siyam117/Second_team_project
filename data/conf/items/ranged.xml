@@ -126,6 +126,13 @@
       <slot name="trade"/>
     </equipable>
   </item>
+  
+  <item name="wand of sluggishness">
+    <type class="ranged" subclass="wand_of_sluggishness" tileid="-1"/>
+  <description> </description>
+    <implementation class-name="games.stendhal.server.entity.item.WandOfSluggishness"/>
+  </item>
+  
 
 <!-- disabled
   <item name="auto crossbow">

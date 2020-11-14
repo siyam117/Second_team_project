@@ -1,6 +1,5 @@
 package games.stendhal.server.entity.item;
 
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 import org.junit.After;
@@ -15,7 +14,7 @@ import games.stendhal.server.entity.status.StatusType;
 import games.stendhal.server.maps.MockStendlRPWorld;
 import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
-import games.stendhal.server.core.events.TurnNotifier;
+//import games.stendhal.server.core.events.TurnNotifier;
 import games.stendhal.server.core.rp.StendhalRPAction;
 import games.stendhal.server.entity.creature.Creature;
 import utilities.PlayerTestHelper;
@@ -81,6 +80,7 @@ public class WandOfSluggishnessTest {
 		attacker.stopAttack();
 	}
 
+	@Test
 	public void testWandAppliesHeavy() {
 		Player attacker = PlayerTestHelper.createPlayer("attacker");
 		attacker.setLevel(100);
@@ -100,6 +100,7 @@ public class WandOfSluggishnessTest {
 		attacker.stopAttack();
 	}
 	
+	@Test
 	public void testWandReducesSpeed() {
 		Player attacker = PlayerTestHelper.createPlayer("attacker");
 		attacker.setLevel(100);
