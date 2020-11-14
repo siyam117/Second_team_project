@@ -41,7 +41,10 @@ public enum StatusType {
 	ZOMBIE(new ZombieStatusHandler()),
 
 	/** reduced movement speed */
-	HEAVY(new HeavyStatusHandler());
+	HEAVY(new HeavyStatusHandler()),
+	
+	/** get rid of poison and heal HP */
+	POISONRECOVERING(new PoisonRecoveringStatusHandler());
 
 	/** the status handler for this StatusType */
 	private final StatusHandler<? extends Status> statusHandler;
