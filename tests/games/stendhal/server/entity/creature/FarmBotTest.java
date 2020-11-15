@@ -1,6 +1,12 @@
 package games.stendhal.server.entity.creature;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -42,6 +48,27 @@ public class FarmBotTest {
 		farmBot.setPosition(0, 0);
 		assertNotNull(farmBot);
 		zone.add(farmBot);
+	}
+	
+	@Test
+	public void testCorrectToolEquipped() {
+		PassiveEntityRespawnPoint crop = PassiveEntityRespawnPointFactory.create("vegetable", 0, null, 0, 0);
+		zone.add(crop);
+		
+		farmBot.equipCorrectTool(crop);
+		assertNull(farmBot.getEquippedItemClass("lhand", "axe"));
+		
+		crop = PassiveEntityRespawnPointFactory.create("corn", 0, null, 0, 0);
+		farmBot.equipCorrectTool(crop);
+		assertThat(farmBot.getEquippedItemClass("lhand", "axe").getName(), is("scythe"));
+		
+		crop = PassiveEntityRespawnPointFactory.create("corn", 1, null, 0, 0);
+		farmBot.equipCorrectTool(crop);
+		assertThat(farmBot.getEquippedItemClass("lhand", "axe").getName(), is("sickle"));
+		
+		crop = PassiveEntityRespawnPointFactory.create("corn", 2, null, 0, 0);
+		farmBot.equipCorrectTool(crop);
+		assertThat(farmBot.getEquippedItemClass("lhand", "axe").getName(), is("sickle"));
 	}
 	
 	@Test

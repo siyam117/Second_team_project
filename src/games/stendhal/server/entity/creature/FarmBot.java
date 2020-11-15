@@ -35,4 +35,9 @@ public class FarmBot extends DomesticAnimal {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	protected void equipCorrectTool(PassiveEntityRespawnPoint crop) {
+		// TODO Auto-generated method stub
+		
+	}
 }
