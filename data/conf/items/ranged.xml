@@ -131,6 +131,21 @@
     <type class="ranged" subclass="wand_of_sluggishness" tileid="-1"/>
   <description> </description>
     <implementation class-name="games.stendhal.server.entity.item.WandOfSluggishness"/>
+    <attributes>
+      <atk value="1" condition="!testing.combat"/>
+      <ratk value="1" condition="testing.combat"/>
+      <range value="1"/>
+    </attributes>
+    <weight value="1"/>
+    <value value="0"/>
+    <equipable>
+      <slot name="ground"/>
+      <slot name="content"/>
+      <slot name="lhand"/>
+      <slot name="rhand"/>
+      <slot name="bag"/>
+      <slot name="trade"/>
+    </equipable>
   </item>
   
 
