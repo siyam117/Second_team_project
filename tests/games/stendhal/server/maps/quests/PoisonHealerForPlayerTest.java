@@ -2,8 +2,12 @@ package games.stendhal.server.maps.quests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static utilities.SpeakerNPCTestHelper.getReply;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -28,6 +32,8 @@ public class PoisonHealerForPlayerTest {
 
 	private SpeakerNPC doctor;
 	private SpeakerNPC nurse;
+	private SpeakerNPC nurse2;
+
 
 	private PoisonHealerForPlayer phfp;
 	
@@ -52,6 +58,7 @@ public class PoisonHealerForPlayerTest {
 		new PoisonNurseNPC().configureZone(zone, null);
 		doctor = SingletonRepository.getNPCList().get("Poison Doctor") ;
 		nurse = SingletonRepository.getNPCList().get("Poison Nurse") ;
+		nurse2 = SingletonRepository.getNPCList().get("Poison Nurse") ;
 
 		phfp = new PoisonHealerForPlayer();
 
@@ -94,5 +101,86 @@ public class PoisonHealerForPlayerTest {
 				getReply(nurse));
 		assertEquals("done", player.getQuest("healer_player"));
 		en.step(player, "bye");
+		
+		// reject
+		final Player player2 = PlayerTestHelper.createPlayer("player");
+		
+		en = doctor.getEngine();
+		
+		en.step(player2, "hi");
+		assertEquals("Hi, do you need any #help", getReply(doctor));
+
+		en.step(player2, "help");
+		assertEquals(
+				"I see you are poisoned, go down to get treatment from nurse",
+				getReply(doctor));
+		en.step(player2, "no");
+		assertTrue(player2.hasQuest("healer_player"));
+		assertEquals("rejected", player2.getQuest("healer_player"));
+		en.step(player2, "bye");
 	}
+	
+	@Test
+	public void testQuestWithNotEnoughMoney() {
+
+		final Player player3 = PlayerTestHelper.createPlayer("player");
+
+		en = doctor.getEngine();
+		
+		en.step(player3, "hi");
+		assertEquals("Hi, do you need any #help", getReply(doctor));
+		
+		en.step(player3, "help");
+		assertEquals(
+				"I see you are poisoned, go down to get treatment from nurse",
+				getReply(doctor));
+		// accept
+		en.step(player3, "yes");
+		assertTrue(player3.hasQuest("healer_player"));
+		en.step(player3, "bye");
+		assertFalse(doctor.isTalking());
+		assertEquals("start", player3.getQuest("healer_player"));
+		en = nurse2.getEngine();
+		assertNotEquals(500, player3.getNumberOfEquipped("money"));
+		en.step(player3, "hi");
+		assertEquals(
+				"You need to have 500 money, otherwise we are not able to help you",
+				getReply(nurse2));
+		en.step(player3, "bye");
+	}
+	
+
+
+	/**
+	 * Tests for getHistory.
+	 */
+	@Test
+	public void testgetHistory() {
+		final Player player = PlayerTestHelper.createPlayer("bob");
+		assertTrue(phfp.getHistory(player).isEmpty());
+		player.setQuest("healer_player", "");
+		final List<String> history = new LinkedList<String>();
+		history.add("I have talked to Poison Doctor.");
+		assertEquals(history, phfp.getHistory(player));
+
+		player.setQuest("healer_player", "rejected");
+		history.add("I do not want to waste my money.");
+		assertEquals(history, phfp.getHistory(player));
+
+		player.setQuest("healer_player", "start");
+		history.remove("I do not want to waste my money.");
+		history.add("I go to find Nurse.");
+		assertEquals(history, phfp.getHistory(player));
+
+		player.equipToInventoryOnly(SingletonRepository.getEntityManager().getItem("money"));
+		history.add("I have enough money.");
+		assertEquals(history, phfp.getHistory(player));
+		player.setQuest("healer_player", "done");
+		history.add("I gave the money to Nurse. She gave me medicine.");
+		assertEquals(history, phfp.getHistory(player));
+
+	}
+
+
+
 }

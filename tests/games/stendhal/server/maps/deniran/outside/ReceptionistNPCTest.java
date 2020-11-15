@@ -1,4 +1,4 @@
-package games.stendhal.server.maps.deniran.cityinterior.hospital;
+package games.stendhal.server.maps.deniran.outside;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -11,31 +11,30 @@ import static utilities.SpeakerNPCTestHelper.getReply;
 
 import games.stendhal.server.entity.npc.SpeakerNPC;
 import games.stendhal.server.entity.npc.fsm.Engine;
+import games.stendhal.server.maps.deniran.ReceptionistNPC;
 import utilities.QuestHelper;
 import utilities.ZonePlayerAndNPCTestImpl;
 
 
 
-public class PoisonDoctorNPCTest extends ZonePlayerAndNPCTestImpl{
+public class ReceptionistNPCTest extends ZonePlayerAndNPCTestImpl{
 	
-	private static final String ZONE_NAME = "int_deniran_hospital";
-	//private static SpeakerNPC speakerTest;
-	
+	private static final String ZONE_NAME = "0_deniran_city_sw";
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		QuestHelper.setUpBeforeClass();
 		setupZone(ZONE_NAME);
 	}
 	
-	public PoisonDoctorNPCTest() {
-		setNpcNames("Poison Doctor");
+	public ReceptionistNPCTest() {
+		setNpcNames("Receptionist");
 		setZoneForPlayer(ZONE_NAME);
-		addZoneConfigurator(new PoisonDoctorNPC(), ZONE_NAME);
+		addZoneConfigurator(new ReceptionistNPC(), ZONE_NAME);
 	}	
 	@Test
 	public void createDialogTest() {
 		
-		final SpeakerNPC speakerNPCTest = getNPC("Poison Doctor");
+		final SpeakerNPC speakerNPCTest = getNPC("Receptionist");
 		assertNotNull(speakerNPCTest);
 		
 		final Engine engineTest = speakerNPCTest.getEngine();
@@ -43,7 +42,19 @@ public class PoisonDoctorNPCTest extends ZonePlayerAndNPCTestImpl{
 		assertTrue(speakerNPCTest.isTalking());
 		String replay = getReply(speakerNPCTest);
 		assertNotNull(replay);
-		assertEquals("Hi, do you need any #help", replay);
+		assertEquals("Hello and welcome to Deniran Hospital. I will sell #fruits. #help for more", replay);
+		
+		engineTest.step(player, "help");
+		assertTrue(speakerNPCTest.isTalking());
+		replay = getReply(speakerNPCTest);
+		assertNotNull(replay);
+		assertEquals("We will open soon, if you interesting in this, contact us to be a admin to test", replay);
+		
+		engineTest.step(player, "fruit");
+		assertTrue(speakerNPCTest.isTalking());
+		replay = getReply(speakerNPCTest);
+		assertNotNull(replay);
+		assertEquals("We only offer #apple, #carrot now, future will have more fruits and flowers and get well soon card", replay);
 		
 		engineTest.step(player, "bye");
 		assertFalse(speakerNPCTest.isTalking());
@@ -51,3 +62,4 @@ public class PoisonDoctorNPCTest extends ZonePlayerAndNPCTestImpl{
 	}
 
 }
+

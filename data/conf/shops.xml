@@ -635,5 +635,10 @@
 		<item name="greater antidote" price="150" />
 		<item name="sedative" price="400" />
 	</shop>
+	
+	<shop name="deniranhospitalreception" type="sells">
+		<item name="apple" price="10" />
+		<item name="carrot" price="10" />
+	</shop>
 
 </shops>
