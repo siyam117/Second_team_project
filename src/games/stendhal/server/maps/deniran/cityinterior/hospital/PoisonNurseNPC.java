@@ -23,7 +23,7 @@ public class PoisonNurseNPC implements ZoneConfigurator  {
 
 			@Override
 			public void createDialog() {
-				addGreeting("Hi, I can give you medicine for poison stauts, but need allowance from doctor");
+				addGreeting("Hi, I can give you medicine for poison state, but need allowance from doctor");
 				
 				
 

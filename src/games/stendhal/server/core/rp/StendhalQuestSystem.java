@@ -24,7 +24,9 @@ import games.stendhal.server.core.events.TurnNotifier;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.maps.quests.*;
 import games.stendhal.server.maps.quests.antivenom_ring.AntivenomRing;
-//import games.stendhal.server.maps.quests.deniran.hospital.PoisonHealerForPlayer;
+import games.stendhal.server.maps.quests.deniran.hospital.ConfuseHealerForPlayer;
+import games.stendhal.server.maps.quests.deniran.hospital.PoisonHealerForPlayer;
+import games.stendhal.server.maps.quests.deniran.hospital.ShockHealerForPlayer;
 
 /**
  * Loads and manages all quests.
@@ -182,7 +184,9 @@ public class StendhalQuestSystem {
 		loadQuest(new WeeklyItemQuest());
 		loadQuest(new WizardBank());
 		loadQuest(new ZekielsPracticalTestQuest());
-		//loadQuest(new PoisonHealerForPlayer());
+		loadQuest(new PoisonHealerForPlayer());
+		loadQuest(new ConfuseHealerForPlayer());
+		loadQuest(new ShockHealerForPlayer());
 		loadQuest(new ZooFood());
 
 		if (Occasion.CHRISTMAS) {

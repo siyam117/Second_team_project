@@ -1337,6 +1337,9 @@
 		<!-- NPCs -->
 		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.hospital.ReceptionistNPC"/>
 		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.hospital.PoisonNurseNPC"/>
+		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.hospital.ShockNurseNPC"/>
+		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.hospital.ConfuseNurseNPC"/>
+	
 		
 	</zone>
 
@@ -1347,7 +1350,9 @@
 		</portal>
 		
 		<!-- NPCs -->
-		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.hospital.PoisonDoctorNPC"/>		
+		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.hospital.PoisonDoctorNPC"/>
+		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.hospital.ShockDoctorNPC"/>
+		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.hospital.ConfuseDoctorNPC"/>		
 
 	</zone>
 

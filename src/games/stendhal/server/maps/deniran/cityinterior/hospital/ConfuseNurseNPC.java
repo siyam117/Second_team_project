@@ -5,7 +5,7 @@ import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.npc.SpeakerNPC;
 import java.util.Map;
 
-public class PoisonDoctorNPC implements ZoneConfigurator  {
+public class ConfuseNurseNPC implements ZoneConfigurator  {
 	
 
 	@Override
@@ -14,7 +14,7 @@ public class PoisonDoctorNPC implements ZoneConfigurator  {
 	}
 
 	private void buildNPC(StendhalRPZone zone) {
-		final SpeakerNPC npc = new SpeakerNPC("Poison Doctor") {
+		final SpeakerNPC npc = new SpeakerNPC("Confuse Nurse") {
 
 			@Override
 			protected void createPath() {
@@ -23,14 +23,15 @@ public class PoisonDoctorNPC implements ZoneConfigurator  {
 
 			@Override
 			public void createDialog() {
-				addGreeting("Hi, do you need any #help");
+				addGreeting("Hi, I can give you medicine for confused state, but need allowance from doctor");
 				
+
 				addGoodbye();
 			}};
 			
-			npc.setPosition(19, 4);
-			npc.setEntityClass("womanonstoolnpc");
-			npc.setDescription("You see doctor. She will tell you a treatment.");
+			npc.setPosition(5, 13);
+			npc.setEntityClass("woman_003_npc");
+			npc.setDescription("You see nurese. She will tell you medicine.");
 			zone.add(npc);
 	}
 }

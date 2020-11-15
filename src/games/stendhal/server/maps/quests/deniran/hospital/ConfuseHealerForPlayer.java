@@ -16,7 +16,7 @@ import games.stendhal.server.maps.quests.AbstractQuest;
 
 import java.util.*;
 
-public class PoisonHealerForPlayer extends AbstractQuest {
+public class ConfuseHealerForPlayer extends AbstractQuest {
 
     public static final String QUEST_SLOT = "healer_player";
 
@@ -29,7 +29,7 @@ public class PoisonHealerForPlayer extends AbstractQuest {
 
     @Override
     public String getName() {
-        return "PoisonHealerForPlayer";
+        return "ConfuseHealerForPlayer";
     }
 
 	@Override
@@ -38,7 +38,7 @@ public class PoisonHealerForPlayer extends AbstractQuest {
 		if (!player.hasQuest(QUEST_SLOT)) {
 			return res;
 		}
-		res.add("I have talked to Poison Doctor.");
+		res.add("I have talked to Confuse Doctor.");
 		final String questState = player.getQuest(QUEST_SLOT);
 		if ("rejected".equals(questState)) {
 			res.add("I do not want to waste my money.");
@@ -58,14 +58,13 @@ public class PoisonHealerForPlayer extends AbstractQuest {
     
     private void prepareRequestingStep() {
 
-        // get a reference to the Hayunn npc
-        SpeakerNPC npc = npcs.get("Poison Doctor");
+        SpeakerNPC npc = npcs.get("Confuse Doctor");
         
 		npc.add(ConversationStates.ATTENDING,
 				"help",
 				null,
 				ConversationStates.QUEST_OFFERED,
-				"Sorry I'm busy right now, but if you need a healer, please go find a nurse",
+				"You can go talk to the nurse to get some medicine",
 				null);
 		
 		npc.add(
@@ -81,13 +80,13 @@ public class PoisonHealerForPlayer extends AbstractQuest {
 				ConversationPhrases.NO_MESSAGES,
 				null,
 				ConversationStates.ATTENDING,
-				"Oh, well, hope you will get well soon",
+				"Get well soon!",
 				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0));
     }
 
     
     private void prepareBringingStep() {
-        SpeakerNPC npc = npcs.get("Poison Nurse");
+        SpeakerNPC npc = npcs.get("Confuse Nurse");
         
         // player has the quest active and has a beer with him, ask for it
         npc.add(
@@ -95,7 +94,7 @@ public class PoisonHealerForPlayer extends AbstractQuest {
             ConversationPhrases.GREETING_MESSAGES,
             new AndCondition(new QuestActiveCondition(QUEST_SLOT), new PlayerHasItemWithHimCondition("money", 500)),
             ConversationStates.QUEST_ITEM_BROUGHT, 
-            "Come here, I will give you medicine",
+            "Here, take this medicine",
             null);
 
         // player has accepted the quest but did not bring a money, remind him
@@ -110,7 +109,7 @@ public class PoisonHealerForPlayer extends AbstractQuest {
         List<ChatAction> reward = new LinkedList<ChatAction>();
         reward.add(new DropItemAction("money", 500));
         reward.add(new SetQuestAction(QUEST_SLOT, "done"));
-        reward.add(new EquipItemAction("poison healer"));
+        reward.add(new EquipItemAction("confuse healer"));
         npc.add(
     		 ConversationStates.QUEST_ITEM_BROUGHT,
     		 ConversationPhrases.YES_MESSAGES,
@@ -131,14 +130,14 @@ public class PoisonHealerForPlayer extends AbstractQuest {
     
     @Override
     public String getNPCName() {
-        return "Poison Doctor";
+        return "Confuse Doctor";
     }
     
 	@Override
 	public void addToWorld() {
 		fillQuestInfo(
-				"poison healer for player",
-				"player with posioned status.",
+				"confuse healer for player",
+				"player with confused status.",
 				false);
 		prepareRequestingStep();
 		prepareBringingStep();
@@ -148,7 +147,7 @@ public class PoisonHealerForPlayer extends AbstractQuest {
 
 	public String getTitle() {
 
-		return "Poison Healer for Player";
+		return "Confuse Healer for Player";
 	}
 
 	@Override

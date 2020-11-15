@@ -21,21 +21,21 @@ import games.stendhal.server.entity.npc.fsm.Engine;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.maps.MockStendhalRPRuleProcessor;
 import games.stendhal.server.maps.MockStendlRPWorld;
-import games.stendhal.server.maps.deniran.cityinterior.hospital.PoisonDoctorNPC;
-import games.stendhal.server.maps.deniran.cityinterior.hospital.PoisonNurseNPC;
-import games.stendhal.server.maps.quests.deniran.hospital.PoisonHealerForPlayer;
+import games.stendhal.server.maps.deniran.cityinterior.hospital.ConfuseDoctorNPC;
+import games.stendhal.server.maps.deniran.cityinterior.hospital.ConfuseNurseNPC;
+import games.stendhal.server.maps.quests.deniran.hospital.ConfuseHealerForPlayer;
 import marauroa.common.Log4J;
 import marauroa.common.game.RPObject.ID;
 import utilities.PlayerTestHelper;
 
-public class PoisonHealerForPlayerTest {
+public class ConfuseHealerForPlayerTest {
 
 	private SpeakerNPC doctor;
 	private SpeakerNPC nurse;
 	private SpeakerNPC nurse2;
 
 
-	private PoisonHealerForPlayer phfp;
+	private ConfuseHealerForPlayer phfp;
 	
 	private Player player = null;
 	private Engine en = null;
@@ -54,13 +54,13 @@ public class PoisonHealerForPlayerTest {
 	public void setup() {
 		PlayerTestHelper.removeAllPlayers();
 		StendhalRPZone zone = new StendhalRPZone("admin_test");
-		new PoisonDoctorNPC().configureZone(zone, null);
-		new PoisonNurseNPC().configureZone(zone, null);
-		doctor = SingletonRepository.getNPCList().get("Poison Doctor") ;
-		nurse = SingletonRepository.getNPCList().get("Poison Nurse") ;
-		nurse2 = SingletonRepository.getNPCList().get("Poison Nurse") ;
+		new ConfuseDoctorNPC().configureZone(zone, null);
+		new ConfuseNurseNPC().configureZone(zone, null);
+		doctor = SingletonRepository.getNPCList().get("Confuse Doctor") ;
+		nurse = SingletonRepository.getNPCList().get("Confuse Nurse") ;
+		nurse2 = SingletonRepository.getNPCList().get("Confuse Nurse") ;
 
-		phfp = new PoisonHealerForPlayer();
+		phfp = new ConfuseHealerForPlayer();
 
 		phfp.addToWorld();
 	}
@@ -73,10 +73,10 @@ public class PoisonHealerForPlayerTest {
 		en = doctor.getEngine();
 		
 		en.step(player, "hi");
-		assertEquals("Hi, do you need any #help", getReply(doctor));
+		assertEquals("Hi, can I #help you?", getReply(doctor));
 		
 		en.step(player, "help");
-		assertEquals("Sorry I'm busy right now, but if you need a healer, please go find a nurse", getReply(doctor));
+		assertEquals("You can go talk to the nurse to get some medicine", getReply(doctor));
 		// accept
 		en.step(player, "yes");
 		assertTrue(player.hasQuest("healer_player"));
@@ -91,7 +91,7 @@ public class PoisonHealerForPlayerTest {
 		assertEquals(500, player.getNumberOfEquipped("money"));
 		en.step(player, "hi");
 		assertEquals(
-				"Come here, I will give you medicine",
+				"Here, take this medicine",
 				getReply(nurse));
 		en.step(player, "yes");
 		assertEquals(
@@ -105,11 +105,13 @@ public class PoisonHealerForPlayerTest {
 		
 		en = doctor.getEngine();
 		
-		en.step(player2, "hi");
-		assertEquals("Hi, do you need any #help", getReply(doctor));
+		en.step(player, "hi");
+		assertEquals("Hi, can I #help you?", getReply(doctor));
 		
 		en.step(player, "help");
-		assertEquals("Sorry I'm busy right now, but if you need a healer, please go find a nurse", getReply(doctor));
+		assertEquals(
+				"You can go talk to the nurse to get some medicine",
+				getReply(doctor));
 
 		//en.step(player2, "help");
 		//assertEquals(
@@ -128,11 +130,13 @@ public class PoisonHealerForPlayerTest {
 
 		en = doctor.getEngine();
 		
-		en.step(player3, "hi");
-		assertEquals("Hi, do you need any #help", getReply(doctor));
+		en.step(player, "hi");
+		assertEquals("Hi, can I #help you?", getReply(doctor));
 		
-		en.step(player3,  "help");
-		assertEquals("Sorry I'm busy right now, but if you need a healer, please go find a nurse", getReply(doctor));
+		en.step(player, "help");
+		assertEquals(
+				"You can go talk to the nurse to get some medicine",
+				getReply(doctor));
 		
 		//en.step(player3, "help");
 		//assertEquals(
@@ -164,7 +168,7 @@ public class PoisonHealerForPlayerTest {
 		assertTrue(phfp.getHistory(player).isEmpty());
 		player.setQuest("healer_player", "");
 		final List<String> history = new LinkedList<String>();
-		history.add("I have talked to Poison Doctor.");
+		history.add("I have talked to Confuse Doctor.");
 		assertEquals(history, phfp.getHistory(player));
 
 		player.setQuest("healer_player", "rejected");

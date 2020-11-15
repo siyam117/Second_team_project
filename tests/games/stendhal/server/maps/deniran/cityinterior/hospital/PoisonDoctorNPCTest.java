@@ -37,8 +37,8 @@ public class PoisonDoctorNPCTest extends ZonePlayerAndNPCTestImpl{
 		
 		final SpeakerNPC speakerNPCTest = getNPC("Poison Doctor");
 		assertNotNull(speakerNPCTest);
-		
 		final Engine engineTest = speakerNPCTest.getEngine();
+		
 		engineTest.step(player, "hi");
 		assertTrue(speakerNPCTest.isTalking());
 		String replay = getReply(speakerNPCTest);

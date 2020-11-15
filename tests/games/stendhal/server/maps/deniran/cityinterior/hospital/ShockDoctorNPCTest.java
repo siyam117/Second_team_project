@@ -16,7 +16,7 @@ import utilities.ZonePlayerAndNPCTestImpl;
 
 
 
-public class PoisonNurseNPCTest extends ZonePlayerAndNPCTestImpl{
+public class ShockDoctorNPCTest extends ZonePlayerAndNPCTestImpl{
 	
 	private static final String ZONE_NAME = "int_deniran_hospital";
 	//private static SpeakerNPC speakerTest;
@@ -27,15 +27,15 @@ public class PoisonNurseNPCTest extends ZonePlayerAndNPCTestImpl{
 		setupZone(ZONE_NAME);
 	}
 	
-	public PoisonNurseNPCTest() {
-		setNpcNames("Poison Nurse");
+	public ShockDoctorNPCTest() {
+		setNpcNames("Shock Doctor");
 		setZoneForPlayer(ZONE_NAME);
-		addZoneConfigurator(new PoisonNurseNPC(), ZONE_NAME);
+		addZoneConfigurator(new ShockDoctorNPC(), ZONE_NAME);
 	}	
 	@Test
 	public void createDialogTest() {
 		
-		final SpeakerNPC speakerNPCTest = getNPC("Poison Nurse");
+		final SpeakerNPC speakerNPCTest = getNPC("Shock Doctor");
 		assertNotNull(speakerNPCTest);
 		
 		final Engine engineTest = speakerNPCTest.getEngine();
@@ -43,7 +43,7 @@ public class PoisonNurseNPCTest extends ZonePlayerAndNPCTestImpl{
 		assertTrue(speakerNPCTest.isTalking());
 		String replay = getReply(speakerNPCTest);
 		assertNotNull(replay);
-		assertEquals("Hi, I can give you medicine for poison state, but need allowance from doctor", replay);
+		assertEquals("Hi, can I #help you?", replay);
 		
 		engineTest.step(player, "bye");
 		assertFalse(speakerNPCTest.isTalking());
@@ -51,5 +51,3 @@ public class PoisonNurseNPCTest extends ZonePlayerAndNPCTestImpl{
 	}
 
 }
-
-
