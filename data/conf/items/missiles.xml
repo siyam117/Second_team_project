@@ -164,5 +164,28 @@
       <slot name="trade"/>
     </equipable>
   </item>
+  
+   <item name="wand">
+    <type class="missile" subclass="wand" tileid="-1"/>
+    <description>You see a simple metal wand, it feels heavy in your hand and pulses with grey energy.</description>
+    <implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
+    <attributes>
+      <atk value="10" condition="!testing.combat"/>
+      <ratk value="10" condition="testing.combat"/>
+      <range value="500"/>
+      <quantity value="1"/>
+      <max_quantity value="1"/>
+    </attributes>
+    <weight value="0.1"/>
+    <value value="12000"/>
+    <equipable>
+      <slot name="ground"/>
+      <slot name="content"/>
+      <slot name="lhand"/>
+      <slot name="rhand"/>
+      <slot name="bag"/>
+      <slot name="trade"/>
+    </equipable>
+  </item>
 
 </items>

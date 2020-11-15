@@ -47,6 +47,8 @@ import games.stendhal.server.entity.item.StackableItem;
 import games.stendhal.server.entity.npc.SpeakerNPC;
 import games.stendhal.server.entity.npc.TrainingDummy;
 import games.stendhal.server.entity.player.Player;
+import games.stendhal.server.entity.status.HeavyStatus;
+import games.stendhal.server.entity.status.HeavyStatusHandler;
 import games.stendhal.server.events.AttackEvent;
 import marauroa.common.game.RPObject;
 import marauroa.common.net.message.TransferContent;
@@ -367,11 +369,12 @@ public class StendhalRPAction {
 		final List<BreakableItem> broken = new ArrayList<>();
 
 		if (beaten) {
+			
 			if ((defender instanceof Player)
 					&& defender.getsFightXpFrom(player)) {
 				defender.incDefXP();
 			}
-
+			
 			final List<Item> weapons = player.getWeapons();
 			final float itemAtk;
 			if (Testing.COMBAT && isRanged) {
@@ -431,6 +434,11 @@ public class StendhalRPAction {
 
 			player.addEvent(new AttackEvent(true, damage, player.getDamageType(), weaponClass, isRanged));
 			player.notifyWorldAboutChanges();
+			
+			if(player.getWeapon().getName().equals("wand")) {
+				new HeavyStatusHandler().inflict(new HeavyStatus(), defender.getStatusList(), player);
+			}
+			
 		} else {
 			// Missed
 			logger.debug("attack from " + player.getID() + " to "
@@ -442,7 +450,10 @@ public class StendhalRPAction {
 		if (isRanged) {
 			// Removing the missile is deferred here so that the weapon
 			// information is available when calculating the damage.
-			useMissile(player);
+			if(!player.getWeapon().getName().equals("wand")) {
+				useMissile(player);
+			}
+			
 		}
 
 		player.notifyWorldAboutChanges();

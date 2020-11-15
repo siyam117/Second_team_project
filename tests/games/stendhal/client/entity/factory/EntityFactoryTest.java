@@ -330,11 +330,11 @@ public class EntityFactoryTest {
 	
 	@Test
 	public final void stackableItemWand() {
-		RPObject rp = new MockRPObject("item", "wand");
+		RPObject rp = new MockRPObject("item", "wand of sluggishness");
 		IEntity en = EntityFactory.createEntity(rp);
 		assertNotNull("entity should be created", en);
 		assertEquals("we should have created a UseableItem by now",
-				UseableItem.class, en.getClass());
+				Item.class, en.getClass());
 		}
 
 	
