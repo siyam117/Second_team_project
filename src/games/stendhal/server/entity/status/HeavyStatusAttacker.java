@@ -2,9 +2,8 @@ package games.stendhal.server.entity.status;
 
 public class HeavyStatusAttacker extends StatusAttacker{
 
-	public HeavyStatusAttacker(Status status, double probability) {
-		super(status, probability);
-		
+	public HeavyStatusAttacker(double probability) {
+		super(new HeavyStatus(), probability);
 	}
 
 	

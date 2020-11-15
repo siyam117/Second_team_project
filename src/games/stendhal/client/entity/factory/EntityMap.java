@@ -155,7 +155,7 @@ public final class EntityMap {
 
 		register("item", "token", null, Item.class);
 		
-		register("item", "wand", null, StackableItem.class);
+		register("item", "wand_of_sluggishness", null, StackableItem.class);
 
 		register("portal", null, null, Portal.class);
 		register("house_portal", null, null, HousePortal.class);

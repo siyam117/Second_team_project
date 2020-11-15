@@ -165,19 +165,19 @@
     </equipable>
   </item>
   
-   <item name="wand">
-    <type class="missile" subclass="wand" tileid="-1"/>
+   <item name="wand of sluggishness">
+    <type class="missile" subclass="wand_of_sluggishness" tileid="-1"/>
     <description>You see a simple metal wand, it feels heavy in your hand and pulses with grey energy.</description>
     <implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
     <attributes>
-      <atk value="10" condition="!testing.combat"/>
-      <ratk value="10" condition="testing.combat"/>
-      <range value="500"/>
+      <atk value="-1" condition="!testing.combat"/>
+      <ratk value="-1" condition="testing.combat"/>
+      <range value="5"/>
       <quantity value="1"/>
       <max_quantity value="1"/>
     </attributes>
-    <weight value="0.1"/>
-    <value value="12000"/>
+    <weight value="1"/>
+    <value value="120000"/>
     <equipable>
       <slot name="ground"/>
       <slot name="content"/>

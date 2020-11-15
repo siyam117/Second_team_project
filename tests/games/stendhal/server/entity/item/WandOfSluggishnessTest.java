@@ -14,7 +14,6 @@ import games.stendhal.server.entity.status.StatusType;
 import games.stendhal.server.maps.MockStendlRPWorld;
 import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
-//import games.stendhal.server.core.events.TurnNotifier;
 import games.stendhal.server.core.rp.StendhalRPAction;
 import games.stendhal.server.entity.creature.Creature;
 import utilities.PlayerTestHelper;
@@ -51,16 +50,25 @@ public class WandOfSluggishnessTest {
 	
 	@Test
 	public void testWandDescription() {
-		final WandOfSluggishness wand = (WandOfSluggishness) SingletonRepository.getEntityManager().getItem("wand of sluggishness");
-		assertEquals(wand.describe(), "You see a simple metal wand, it feels heavy in your hand and pulses with grey energy.");
+		final StackableItem wand = (StackableItem) SingletonRepository.getEntityManager().getItem("wand of sluggishness");
+		assertEquals(wand.describe(), "You see a simple metal wand, it feels heavy in your hand and pulses with grey energy. Stats are (ATK: -1 RANGE: 5).");
 
 	}
+	
+	@Test
+	public void wandIsInTheBagTest() {
+		Player holder = PlayerTestHelper.createPlayer("holder");
+		final StackableItem wand = (StackableItem) SingletonRepository.getEntityManager().getItem("wand of sluggishness");
+		holder.equip("bag", wand);
+		assertTrue(holder.isEquipped("wand of sluggishness"));
+	}
+
 
 	@Test
 	public void testWandDoesNoDamage() {
 		Player attacker = PlayerTestHelper.createPlayer("attacker");
 		attacker.setLevel(100);
-		final WandOfSluggishness wand = (WandOfSluggishness) SingletonRepository.getEntityManager().getItem("wand of sluggishness");
+		final StackableItem wand = (StackableItem) SingletonRepository.getEntityManager().getItem("wand of sluggishness");
 		attacker.equip("rhand", wand);
 		
 		Creature target = SingletonRepository.getEntityManager().getCreature("mouse");
@@ -69,10 +77,8 @@ public class WandOfSluggishnessTest {
 		zone.add(attacker);
 		zone.add(target);
 
-		StendhalRPAction.startAttack(attacker, target);
+		StendhalRPAction.playerAttack(attacker, target);
 		
-		//int currentTurnForDebugging = TurnNotifier.get().getCurrentTurnForDebugging();
-		//TurnNotifier.get().logic(currentTurnForDebugging + 1);
 		
 		int afterHP = Integer.valueOf(target.getHP());
 		
@@ -84,7 +90,7 @@ public class WandOfSluggishnessTest {
 	public void testWandAppliesHeavy() {
 		Player attacker = PlayerTestHelper.createPlayer("attacker");
 		attacker.setLevel(100);
-		final WandOfSluggishness wand = (WandOfSluggishness) SingletonRepository.getEntityManager().getItem("wand of sluggishness");
+		final StackableItem wand = (StackableItem) SingletonRepository.getEntityManager().getItem("wand of sluggishness");
 		attacker.equip("rhand", wand);
 		
 		Creature target = SingletonRepository.getEntityManager().getCreature("mouse");
@@ -92,7 +98,7 @@ public class WandOfSluggishnessTest {
 		zone.add(attacker);
 		zone.add(target);
 
-		StendhalRPAction.startAttack(attacker, target);
+		StendhalRPAction.playerAttack(attacker, target);
 		
 		
 		assertTrue(target.hasStatus(StatusType.HEAVY));
@@ -104,7 +110,7 @@ public class WandOfSluggishnessTest {
 	public void testWandReducesSpeed() {
 		Player attacker = PlayerTestHelper.createPlayer("attacker");
 		attacker.setLevel(100);
-		final WandOfSluggishness wand = (WandOfSluggishness) SingletonRepository.getEntityManager().getItem("wand of sluggishness");
+		final StackableItem wand = (StackableItem) SingletonRepository.getEntityManager().getItem("wand of sluggishness");
 		attacker.equip("rhand", wand);
 		
 		Creature target = SingletonRepository.getEntityManager().getCreature("mouse");
@@ -113,7 +119,7 @@ public class WandOfSluggishnessTest {
 		zone.add(attacker);
 		zone.add(target);
 
-		StendhalRPAction.startAttack(attacker, target);
+		StendhalRPAction.playerAttack(attacker, target);
 		
 		double endSpeed = target.getBaseSpeed();
 		
