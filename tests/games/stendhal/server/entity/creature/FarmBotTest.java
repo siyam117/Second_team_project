@@ -120,4 +120,15 @@ public class FarmBotTest {
 		
 		assertTrue(farmBot.canHarvest(crop));
 	}
+	
+	@Test
+	public void testHarvestsCrops() {
+		PassiveEntityRespawnPoint crop = PassiveEntityRespawnPointFactory.create("vegetable", 0, null, 0, 0);
+		zone.add(crop);
+		
+		crop.setToFullGrowth();
+		farmBot.logic();
+		
+		assertThat(crop.getInt("ripeness"),is(0));
+	}
 }
