@@ -2000,4 +2000,51 @@
 			<slot name="trade" />
 		</equipable>
 	</item>
+	
+	<item name="shock healer">
+		<type class="food" subclass="shock_healer" tileid="-1" />
+		<description>You see a bottle of shock healer, which will heal you from posion and regen.</description>
+		<implementation class-name="games.stendhal.server.entity.item.ShockHealer" />
+		<attributes>
+			<amount value="200" />
+			<frequency value="5" />
+			<quantity value="1" />
+			<regen value="1" />
+			<menu value="Drink|Use"/>
+		</attributes>
+		<weight value="1.0" />
+		<value value="2" />
+		<equipable>
+			<slot name="ground" />
+			<slot name="content" />
+			<slot name="lhand" />
+			<slot name="rhand" />
+			<slot name="bag" />
+			<slot name="trade" />
+		</equipable>
+	</item>
+	
+	<item name="confuse healer">
+		<type class="food" subclass="confuse_healer" tileid="-1" />
+		<description>You see a bottle of confuse healer, which will heal you from confuse and regen.</description>
+		<implementation class-name="games.stendhal.server.entity.item.ConfuseHealer" />
+		<attributes>
+			<amount value="200" />
+			<frequency value="5" />
+			<quantity value="1" />
+			<regen value="1" />
+			<menu value="Drink|Use"/>
+		</attributes>
+		<weight value="1.0" />
+		<value value="2" />
+		<equipable>
+			<slot name="ground" />
+			<slot name="content" />
+			<slot name="lhand" />
+			<slot name="rhand" />
+			<slot name="bag" />
+			<slot name="trade" />
+		</equipable>
+	</item>
+	
 </items>

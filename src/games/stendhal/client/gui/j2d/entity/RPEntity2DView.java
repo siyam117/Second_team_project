@@ -78,6 +78,9 @@ abstract class RPEntity2DView<T extends RPEntity> extends ActiveEntity2DView<T> 
 	private static final Sprite poisonedSprite;
 	private static final Sprite shockedSprite;
 	private static final Sprite heavySprite;
+	private static final Sprite poisonRecoveringSprite;
+	private static final Sprite shockRecoveringSprite;
+	private static final Sprite confuseRecoveringSprite;
 
 	/** Colors of the ring/circle around the player while attacking or being attacked. */
 	private static final Color RING_COLOR_RED = new Color(230, 10, 10);
@@ -148,6 +151,9 @@ abstract class RPEntity2DView<T extends RPEntity> extends ActiveEntity2DView<T> 
 		chokingSprite = st.getSprite("data/sprites/ideas/choking.png");
 		shockedSprite = st.getAnimatedSprite(st.getStatusSprite("shock.png"), 38, 200);
 		heavySprite = st.getAnimatedSprite(st.getStatusSprite("heavy.png"), 200);
+		poisonRecoveringSprite = st.getAnimatedSprite(st.getStatusSprite("recover.png"), 200);
+		shockRecoveringSprite = st.getAnimatedSprite(st.getStatusSprite("recover.png"), 200);
+		confuseRecoveringSprite = st.getAnimatedSprite(st.getStatusSprite("recover.png"), 200);
 	}
 
 	/**
@@ -189,6 +195,24 @@ abstract class RPEntity2DView<T extends RPEntity> extends ActiveEntity2DView<T> 
 		poisonManager.setOffsets(10, -13);
 		addIconManager(poisonManager);
 
+		/* poisonRecovering status */
+		StatusIconManager poisonRecoveringManager = new StatusIconManager(RPEntity.PROP_POISONRECOVERING, poisonRecoveringSprite,
+				HorizontalAlignment.RIGHT, VerticalAlignment.TOP, StatusID.POISONRECOVERING);
+		poisonManager.setOffsets(10, -13);
+		addIconManager(poisonRecoveringManager);
+		
+		/* shockRecovering status */
+		StatusIconManager shockRecoveringManager = new StatusIconManager(RPEntity.PROP_SHOCKRECOVERING, shockRecoveringSprite,
+				HorizontalAlignment.RIGHT, VerticalAlignment.TOP, StatusID.SHOCKRECOVERING);
+		poisonManager.setOffsets(10, -13);
+		addIconManager(shockRecoveringManager);
+		
+		/* ConfuseRecovering status */
+		StatusIconManager ConfuseRecoveringManager = new StatusIconManager(RPEntity.PROP_CONFUSERECOVERING, confuseRecoveringSprite,
+				HorizontalAlignment.RIGHT, VerticalAlignment.TOP, StatusID.CONFUSERECOVERING);
+		poisonManager.setOffsets(10, -13);
+		addIconManager(ConfuseRecoveringManager);
+		
 		/* shock status */
 		addIconManager(new StatusIconManager(RPEntity.PROP_SHOCK, shockedSprite,
 				HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM, StatusID.SHOCK));

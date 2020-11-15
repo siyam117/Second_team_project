@@ -23,7 +23,10 @@ public enum StatusID {
 	POISON("poisoned"),
 	SHOCK("status_shock"),
 	ZOMBIE("status_zombie"),
-	HEAVY("status_heavy");
+	HEAVY("status_heavy"),
+	SHOCKRECOVERING("status_shock_recovering"),
+	CONFUSERECOVERING("status_confuse_recovering"),
+	POISONRECOVERING("status_poison_recovering");
 
 	/** Attribute corresponding to the status. */
 	private final String attribute;

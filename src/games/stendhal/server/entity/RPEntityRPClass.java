@@ -83,6 +83,9 @@ public class RPEntityRPClass {
         entity.addAttribute("status_shock", Type.SHORT, Definition.VOLATILE);
         entity.addAttribute("status_zombie", Type.SHORT, Definition.VOLATILE);
         entity.addAttribute("status_heavy", Type.SHORT, Definition.VOLATILE);
+        entity.addAttribute("status_poison_recovering", Type.SHORT, Definition.VOLATILE);
+        entity.addAttribute("status_shock_recovering", Type.SHORT, Definition.VOLATILE);
+        entity.addAttribute("status_confuse_recovering", Type.SHORT, Definition.VOLATILE);
 
         //Status effects resistances
         entity.addAttribute("resist_confused", Type.FLOAT, Definition.VOLATILE);

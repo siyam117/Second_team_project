@@ -122,6 +122,19 @@ public abstract class RPEntity extends AudibleEntity {
      * Heavy property
      */
     public static final Property PROP_HEAVY = new Property();
+    /**
+     * PoisonRecovering property
+     */
+    public static final Property PROP_POISONRECOVERING = new Property();
+    /**
+     * ShockRecovering property
+     */
+    public static final Property PROP_SHOCKRECOVERING = new Property();
+    /**
+     * ConfuseRecovering property
+     */
+    public static final Property PROP_CONFUSERECOVERING = new Property();
+
 
     private static final Map<StatusID, Property> statusProp;
     static {
@@ -131,6 +144,9 @@ public abstract class RPEntity extends AudibleEntity {
         statusProp.put(StatusID.SHOCK, PROP_SHOCK);
         statusProp.put(StatusID.ZOMBIE, PROP_ZOMBIE);
         statusProp.put(StatusID.HEAVY, PROP_HEAVY);
+        statusProp.put(StatusID.POISONRECOVERING, PROP_POISONRECOVERING);
+        statusProp.put(StatusID.SHOCKRECOVERING, PROP_SHOCKRECOVERING);
+        statusProp.put(StatusID.CONFUSERECOVERING, PROP_CONFUSERECOVERING);
     }
 
 	/**
