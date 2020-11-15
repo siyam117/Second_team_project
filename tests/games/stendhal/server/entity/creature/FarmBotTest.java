@@ -72,7 +72,7 @@ public class FarmBotTest {
 	}
 	
 	@Test
-	public void testGetNearestGrainFieldCrop() {
+	public void testGetNearestHarvestableCrop() {
 		final StendhalRPZone zone = new StendhalRPZone("testzone", 10, 10);
 		MockStendlRPWorld.get().addRPZone(zone);
 		
@@ -86,6 +86,12 @@ public class FarmBotTest {
 		assertNotNull(cropFar);
 		zone.add(cropFar);
 		
+		assertNull(farmBot.getNearestHarvestableCrop());
+		
+		cropFar.setToFullGrowth();
+		assertSame(cropFar, farmBot.getNearestHarvestableCrop());
+		
+		cropClose.setToFullGrowth();
 		assertSame(cropClose, farmBot.getNearestHarvestableCrop());
 	}
 	
@@ -113,8 +119,5 @@ public class FarmBotTest {
 		zone.add(crop);
 		
 		assertTrue(farmBot.canHarvest(crop));
-		
-		crop.setPosition(10, 10);
-		assertFalse(farmBot.canHarvest(crop));
 	}
 }
