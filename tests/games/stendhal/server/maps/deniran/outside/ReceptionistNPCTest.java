@@ -42,13 +42,37 @@ public class ReceptionistNPCTest extends ZonePlayerAndNPCTestImpl{
 		assertTrue(speakerNPCTest.isTalking());
 		String replay = getReply(speakerNPCTest);
 		assertNotNull(replay);
-		assertEquals("Hello and welcome to Deniran Hospital. I will sell #fruits. #help for more", replay);
+		assertEquals("Hello and welcome to Deniran Hospital. I will sell #fruits. #help and #job for more", replay);
+		
+		engineTest.step(player, "job");
+		assertTrue(speakerNPCTest.isTalking());
+		replay = getReply(speakerNPCTest);
+		assertNotNull(replay);
+		assertEquals("We will open soon, if you interesting in this, contact us to be a admin to test", replay);
 		
 		engineTest.step(player, "help");
 		assertTrue(speakerNPCTest.isTalking());
 		replay = getReply(speakerNPCTest);
 		assertNotNull(replay);
-		assertEquals("We will open soon, if you interesting in this, contact us to be a admin to test", replay);
+		assertEquals("Are you #posioned, #shocked or #confused", replay);
+		
+		engineTest.step(player, "poisoned");
+		assertTrue(speakerNPCTest.isTalking());
+		replay = getReply(speakerNPCTest);
+		assertNotNull(replay);
+		assertEquals("Poison doctor is in first floor top right", replay);
+		
+		engineTest.step(player, "shocked");
+		assertTrue(speakerNPCTest.isTalking());
+		replay = getReply(speakerNPCTest);
+		assertNotNull(replay);
+		assertEquals("Shock doctor is in first floor bottom right", replay);
+		
+		engineTest.step(player, "confused");
+		assertTrue(speakerNPCTest.isTalking());
+		replay = getReply(speakerNPCTest);
+		assertNotNull(replay);
+		assertEquals("Confuse doctor is in first floor bottom left", replay);
 		
 		engineTest.step(player, "fruit");
 		assertTrue(speakerNPCTest.isTalking());

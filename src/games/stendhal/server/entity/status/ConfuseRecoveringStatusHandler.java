@@ -35,7 +35,7 @@ public class ConfuseRecoveringStatusHandler implements StatusHandler <ConfuseRec
 		if (count == 0) {
 			statusList.activateStatusAttribute("status_" + status.getName());
 			TurnNotifier.get().notifyInSeconds(25, new StatusRemover(statusList, status));
-			TurnNotifier.get().notifyInTurns(0, new ShockRecoveringStatusTurnListener(statusList));
+			TurnNotifier.get().notifyInTurns(0, new ConfuseRecoveringStatusTurnListener(statusList));
 		}
 	}
 

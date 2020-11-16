@@ -31,8 +31,13 @@ public class ReceptionistNPC implements ZoneConfigurator  {
 
 			@Override
 			public void createDialog() {
-				addGreeting("Hello and welcome to Deniran Hospital. I will sell #fruits. #help for more");
-				addHelp("We will open soon, if you interesting in this, contact us to be a admin to test");
+				addGreeting("Hello and welcome to Deniran Hospital. I will sell #fruits. #help and #job for more");
+				addJob("We will open soon, if you interesting in this, contact us to be a admin to test");
+				addHelp("Are you #posioned, #shocked or #confused");
+				addReply("shocked", "Shock doctor is in first floor bottom right");
+				addReply("poisoned", "Poison doctor is in first floor top right");
+				addReply("confused", "Confuse doctor is in first floor bottom left");
+
 				
 				new SellerAdder().addSeller(this, new SellerBehaviour(shops.get("deniranhospitalreception")));
 
