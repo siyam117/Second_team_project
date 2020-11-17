@@ -17,6 +17,7 @@ public class FarmBot extends DomesticAnimal {
 	private static final Logger logger = Logger.getLogger(FarmBot.class);
 	private List<String> tools;
 	
+	
 	public static void generateRPClass() {
 		try {
 			final RPClass farmBot = new RPClass("farmbot");
@@ -116,14 +117,18 @@ public class FarmBot extends DomesticAnimal {
 		return true;
 	}
 	
-	
-	@Override
 	public void logic() {
-		// TODO Auto-generated method stub
 		super.logic();
+		PassiveEntityRespawnPoint crop = getNearestHarvestableCrop();
+		 if(canHarvest(crop)) {
+			// crop.onUsed(this);
+			 this.setMovement(crop,0,0,this.getMovementRange());
+			 this.applyMovement();
+		 }
+		
 	}
-	
-	/**
+
+		/**
 	 * Does this domestic animal take part in combat?
 	 *
 	 * @return true, if it can be attacked by creatures, false otherwise
