@@ -84,9 +84,18 @@ public class FarmBot extends DomesticAnimal {
 	}
 
 	protected PassiveEntityRespawnPoint getNearestHarvestableCrop() {
-		return null;
-		// TODO Auto-generated method stub
-		
+		int range = this.getMovementRange();
+		double squaredDistance = range * range;
+
+		PassiveEntityRespawnPoint chosen = null;
+
+		for (final PassiveEntityRespawnPoint crop : getZone().getPlantGrowers()) {
+			if (capableOfHarvesting(crop) && (this.squaredDistance(crop) < squaredDistance)) {
+				chosen = crop;
+				squaredDistance = this.squaredDistance(crop);
+			}
+		}
+		return chosen;
 	}
 	
 	protected boolean canHarvest(PassiveEntityRespawnPoint crop) {
@@ -105,5 +114,22 @@ public class FarmBot extends DomesticAnimal {
 		}
 		
 		return true;
+	}
+	
+	
+	@Override
+	public void logic() {
+		// TODO Auto-generated method stub
+		super.logic();
+	}
+	
+	/**
+	 * Does this domestic animal take part in combat?
+	 *
+	 * @return true, if it can be attacked by creatures, false otherwise
+	 */
+	@Override
+	protected boolean takesPartInCombat() {
+		return false;
 	}
 }
