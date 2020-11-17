@@ -1,7 +1,10 @@
 package games.stendhal.server.entity.creature;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
+import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.entity.mapstuff.spawner.GrainField;
 import games.stendhal.server.entity.mapstuff.spawner.PassiveEntityRespawnPoint;
 import games.stendhal.server.entity.mapstuff.spawner.VegetableGrower;
@@ -14,6 +17,7 @@ import marauroa.common.game.SyntaxException;
 public class FarmBot extends DomesticAnimal {
 	
 	private static final Logger logger = Logger.getLogger(FarmBot.class);
+	private List<String> tools;
 	
 	public static void generateRPClass() {
 		try {
@@ -120,7 +124,26 @@ public class FarmBot extends DomesticAnimal {
 	}
 
 	protected void equipCorrectTool(PassiveEntityRespawnPoint crop) {
-		// TODO Auto-generated method stub
 		
+		if(!(crop instanceof GrainField)) {
+			return;
+		}
+		if(!(crop instanceof VegetableGrower)) {
+			return;
+		}
+		if(crop instanceof GrainField)  {
+			if (crop.getName() == "grain") {
+			this.equip("lhand", SingletonRepository.getEntityManager().getItem("scythe"));
+		} 
+			else if (crop.getName() == "sugar cane" || crop.getName() == "corn" ) {
+				this.equip("lhand", SingletonRepository.getEntityManager().getItem("sickle"));
+			}
+		}
+		
+		
+		
+	
 	}
+	
+
 }
