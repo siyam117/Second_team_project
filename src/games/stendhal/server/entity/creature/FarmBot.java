@@ -5,9 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import games.stendhal.server.core.engine.SingletonRepository;
-import games.stendhal.server.entity.mapstuff.spawner.GrainField;
 import games.stendhal.server.entity.mapstuff.spawner.PassiveEntityRespawnPoint;
-import games.stendhal.server.entity.mapstuff.spawner.VegetableGrower;
 import games.stendhal.server.entity.player.Player;
 import marauroa.common.game.Definition.Type;
 import marauroa.common.game.RPClass;
@@ -79,6 +77,10 @@ public class FarmBot extends DomesticAnimal {
 
 		// set the default movement range
 		setMovementRange(20);
+		addSlot("lhand");
+		addSlot("rhand");
+		equipOrPutOnGround(SingletonRepository.getEntityManager().getItem("scythe"));
+		equipOrPutOnGround(SingletonRepository.getEntityManager().getItem("sickle"));
 	}
 
 	protected PassiveEntityRespawnPoint getNearestHarvestableCrop() {
@@ -86,64 +88,22 @@ public class FarmBot extends DomesticAnimal {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	protected boolean canHarvest(PassiveEntityRespawnPoint crop) {
-		if (crop instanceof GrainField) {
-			return canHarvestGrainField(crop);
-		}
-		if (crop instanceof VegetableGrower) {
-			return canHarvestVegetableGrower(crop);
-		}
-		return false;
-	}
-	
-	private boolean canHarvestGrainField(PassiveEntityRespawnPoint crop) {
-		if (!this.nextTo(crop)) {
+		if (crop == null) {
 			return false;
 		}
+		return this.nextTo(crop) && capableOfHarvesting(crop);
+	}
 
+	protected boolean capableOfHarvesting(PassiveEntityRespawnPoint crop) {
+		if(!crop.has("ripeness")) {
+			return false;
+		}
 		if (crop.getInt("ripeness") != crop.getInt("max_ripeness")) {
 			return false;
 		}
-
-		if (!this.isEquippedItemInSlot("lhand", "scythe")) {
-			return false;
-		}
+		
 		return true;
 	}
-	
-	private boolean canHarvestVegetableGrower(PassiveEntityRespawnPoint crop) {
-		if (!this.nextTo(crop)) {
-			return false;
-		}
-
-		if (crop.getInt("ripeness") != crop.getInt("max_ripeness")) {
-			return false;
-		}
-		return true;
-	}
-
-	protected void equipCorrectTool(PassiveEntityRespawnPoint crop) {
-		
-		if(!(crop instanceof GrainField)) {
-			return;
-		}
-		if(!(crop instanceof VegetableGrower)) {
-			return;
-		}
-		if(crop instanceof GrainField)  {
-			if (crop.getName() == "grain") {
-			this.equip("lhand", SingletonRepository.getEntityManager().getItem("scythe"));
-		} 
-			else if (crop.getName() == "sugar cane" || crop.getName() == "corn" ) {
-				this.equip("lhand", SingletonRepository.getEntityManager().getItem("sickle"));
-			}
-		}
-		
-		
-		
-	
-	}
-	
-
 }
