@@ -33,6 +33,7 @@ public class FarmBotTest {
 		PlayerTestHelper.generatePlayerRPClasses();
 		CreatureTestHelper.generateRPClasses();
 		GrowingPassiveEntityRespawnPointTestHelper.generateRPClasses();
+		FarmBot.generateRPClass();
 	}
 
 	@AfterClass
