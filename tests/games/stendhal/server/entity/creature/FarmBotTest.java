@@ -21,6 +21,7 @@ import games.stendhal.server.entity.mapstuff.spawner.PassiveEntityRespawnPointFa
 import games.stendhal.server.maps.MockStendlRPWorld;
 import utilities.PlayerTestHelper;
 import utilities.RPClass.CreatureTestHelper;
+import utilities.RPClass.GrowingPassiveEntityRespawnPointTestHelper;
 
 public class FarmBotTest {
 	private StendhalRPZone zone;
@@ -31,6 +32,7 @@ public class FarmBotTest {
 		MockStendlRPWorld.get();
 		PlayerTestHelper.generatePlayerRPClasses();
 		CreatureTestHelper.generateRPClasses();
+		GrowingPassiveEntityRespawnPointTestHelper.generateRPClasses();
 	}
 
 	@AfterClass
@@ -39,13 +41,16 @@ public class FarmBotTest {
 	}
 	
 	@Before
-	public void initializeZone() {
+	public void initialize() {
 		MockStendlRPWorld.reset();
-		final StendhalRPZone zone = new StendhalRPZone("testzone", 10, 10);
+		this.zone = new StendhalRPZone("testzone", 10, 10);
 		MockStendlRPWorld.get().addRPZone(zone);
 		
-		final FarmBot farmBot = new FarmBot(null);
+//		final Player bob = PlayerTestHelper.createPlayer("bob");
+		
+		this.farmBot = new FarmBot();
 		farmBot.setPosition(0, 0);
+		farmBot.addSlot("lhand");
 		assertNotNull(farmBot);
 		zone.add(farmBot);
 	}
@@ -73,9 +78,6 @@ public class FarmBotTest {
 	
 	@Test
 	public void testGetNearestHarvestableCrop() {
-		final StendhalRPZone zone = new StendhalRPZone("testzone", 10, 10);
-		MockStendlRPWorld.get().addRPZone(zone);
-		
 		assertNull(farmBot.getNearestHarvestableCrop());
 		
 		final GrainField cropClose = new GrainField(null, null);
@@ -103,10 +105,12 @@ public class FarmBotTest {
 		
 		final PassiveEntityRespawnPoint crop = PassiveEntityRespawnPointFactory.create("corn", 0, null, 0, 0);
 		zone.add(crop);
+		crop.onFruitPicked(null);
 		
 		assertFalse(farmBot.canHarvest(crop));
 		
 		farmBot.equip("lhand", SingletonRepository.getEntityManager().getItem("scythe"));
+		crop.setToFullGrowth();
 		assertTrue(farmBot.canHarvest(crop));
 		
 		crop.setPosition(10, 10);
@@ -117,9 +121,13 @@ public class FarmBotTest {
 	public void testCanHarvestTypeVegetableGrower() {
 		assertFalse(farmBot.canHarvest(null));
 		
-		final PassiveEntityRespawnPoint crop = PassiveEntityRespawnPointFactory.create("vegetable", 0, null, 0, 0);
+		final PassiveEntityRespawnPoint crop = PassiveEntityRespawnPointFactory.create("vegetable", 1, null, 0, 0);
 		zone.add(crop);
 		
+		crop.onFruitPicked(null);
+		assertFalse(farmBot.canHarvest(crop));
+		
+		crop.setToFullGrowth();
 		assertTrue(farmBot.canHarvest(crop));
 	}
 	
