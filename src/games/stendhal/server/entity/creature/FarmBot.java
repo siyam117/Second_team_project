@@ -42,7 +42,6 @@ public class FarmBot extends DomesticAnimal {
 		
 		if (owner != null) {
 			owner.getZone().add(this);
-			//owner.setFarmBot(this); //TODO
 		}
 		
 		update();
@@ -116,7 +115,6 @@ public class FarmBot extends DomesticAnimal {
 	@Override
 	public void logic() {
 		super.logic();
-		logger.debug("");
 		PassiveEntityRespawnPoint crop = getNearestHarvestableCrop();
 		if(canHarvest(crop)) {
 			if (crop instanceof VegetableGrower) {
