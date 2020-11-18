@@ -1,6 +1,5 @@
 package games.stendhal.server.entity.status;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.AfterClass;
@@ -27,7 +26,6 @@ public class HeavyStatusAttackerTest {
 		MockStendlRPWorld.get();
 		CreatureTestHelper.generateRPClasses();
 		ItemTestHelper.generateRPClasses();
-		
 	}
 	
 	@AfterClass

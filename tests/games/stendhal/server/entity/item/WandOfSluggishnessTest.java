@@ -3,7 +3,6 @@ package games.stendhal.server.entity.item;
 import static org.junit.Assert.*;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -32,10 +31,6 @@ public class WandOfSluggishnessTest {
 		ItemTestHelper.generateRPClasses();
 	}
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
 	@Before
 	public void setUp() throws Exception {
 		zone = new StendhalRPZone("zone", 20, 20);
@@ -52,7 +47,6 @@ public class WandOfSluggishnessTest {
 	public void testWandDescription() {
 		final StackableItem wand = (StackableItem) SingletonRepository.getEntityManager().getItem("wand of sluggishness");
 		assertEquals(wand.describe(), "You see a simple metal wand, it feels heavy in your hand and pulses with grey energy. Stats are (ATK: -1 RANGE: 5).");
-
 	}
 	
 	@Test
