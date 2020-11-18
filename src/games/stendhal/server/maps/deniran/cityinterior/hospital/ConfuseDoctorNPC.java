@@ -31,7 +31,7 @@ public class ConfuseDoctorNPC implements ZoneConfigurator  {
 			
 			npc.setPosition(5, 14);
 			npc.setEntityClass("woman_008_npc");
-			npc.setDescription("You see doctor. She will tell you a treatment.");
+			npc.setDescription("You see a doctor. She will tell you a treatment.");
 			zone.add(npc);
 	}
 }

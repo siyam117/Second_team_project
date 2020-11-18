@@ -22,11 +22,5 @@ public class PoisonRecover implements Feeder{
 		player.getStatusList().inflictStatus(poison_recoveringstatus, splitOff);
 	
 		return true;
-	
 	}
-	
-
-	
-
-	
 }

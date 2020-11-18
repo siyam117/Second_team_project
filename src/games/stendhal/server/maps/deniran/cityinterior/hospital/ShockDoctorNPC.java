@@ -32,7 +32,7 @@ public class ShockDoctorNPC implements ZoneConfigurator  {
 			
 			npc.setPosition(19, 14);
 			npc.setEntityClass("woman_004_npc");
-			npc.setDescription("You see doctor. She will tell you a treatment.");
+			npc.setDescription("You see a doctor. She will tell you a treatment.");
 			zone.add(npc);
 	}
 }

@@ -52,7 +52,7 @@ public class ShockHealerTest {
 		player2 = PlayerTestHelper.createPlayer("coc");
 		player3 = PlayerTestHelper.createPlayer("dod");
 		player4 = PlayerTestHelper.createPlayer("eoe");
-		player5 = PlayerTestHelper.createPlayer("eoe");
+		player5 = PlayerTestHelper.createPlayer("fof");
 		
 		final StendhalRPZone zone = new StendhalRPZone("zone");
 		zone.add(player1);

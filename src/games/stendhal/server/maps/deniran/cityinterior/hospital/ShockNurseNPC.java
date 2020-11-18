@@ -31,7 +31,7 @@ public class ShockNurseNPC implements ZoneConfigurator  {
 			
 			npc.setPosition(10, 3);
 			npc.setEntityClass("woman_007_npc");
-			npc.setDescription("You see nurese. She will tell you medicine.");
+			npc.setDescription("You see a nurese. She will tell you medicine.");
 			zone.add(npc);
 	}
 }

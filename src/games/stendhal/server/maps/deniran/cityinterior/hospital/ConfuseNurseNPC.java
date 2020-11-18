@@ -31,7 +31,7 @@ public class ConfuseNurseNPC implements ZoneConfigurator  {
 			
 			npc.setPosition(5, 13);
 			npc.setEntityClass("woman_003_npc");
-			npc.setDescription("You see nurese. She will tell you medicine.");
+			npc.setDescription("You see a nurese. She will tell you medicine.");
 			zone.add(npc);
 	}
 }

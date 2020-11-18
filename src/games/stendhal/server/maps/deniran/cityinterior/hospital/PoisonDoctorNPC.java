@@ -30,7 +30,7 @@ public class PoisonDoctorNPC implements ZoneConfigurator  {
 			
 			npc.setPosition(19, 4);
 			npc.setEntityClass("womanonstoolnpc");
-			npc.setDescription("You see doctor. She will tell you a treatment.");
+			npc.setDescription("You see a doctor. She will tell you a treatment.");
 			zone.add(npc);
 	}
 }

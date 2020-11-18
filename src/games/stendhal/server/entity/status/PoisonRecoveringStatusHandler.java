@@ -58,7 +58,7 @@ public class PoisonRecoveringStatusHandler implements StatusHandler <PoisonRecov
 		if (nextStatus != null) {
 			TurnNotifier.get().notifyInSeconds(60, new StatusRemover(statusList, nextStatus));
 		} else {
-			entity.sendPrivateText(NotificationType.SCENE_SETTING, "Congratulations, you have been healed and immunize from poison for a while.");
+			entity.sendPrivateText(NotificationType.SCENE_SETTING, "Congratulations, you have been healed and immunized from poison for a while.");
 			entity.remove("status_" + status.getName());
 			if (entity.has("poisoned")) {
 				entity.remove("poisoned");

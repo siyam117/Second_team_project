@@ -58,7 +58,7 @@ public class ShockRecoveringStatusHandler implements StatusHandler <ShockRecover
 		if (nextStatus != null) {
 			TurnNotifier.get().notifyInSeconds(60, new StatusRemover(statusList, nextStatus));
 		} else {
-			entity.sendPrivateText(NotificationType.SCENE_SETTING, "Congratulations, you have been healed and immunize from shock for a while.");
+			entity.sendPrivateText(NotificationType.SCENE_SETTING, "Congratulations, you have been healed and immunized from shock for a while.");
 			entity.remove("status_" + status.getName());
 			if (entity.has("status_shock")) {
 				entity.remove("status_shock");

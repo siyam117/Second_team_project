@@ -22,11 +22,5 @@ public class ShockRecover implements Feeder{
 		player.getStatusList().inflictStatus(shock_recoveringstatus, splitOff);
 	
 		return true;
-	
 	}
-	
-
-	
-
-	
 }

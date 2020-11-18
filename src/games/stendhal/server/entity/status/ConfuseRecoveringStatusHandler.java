@@ -58,7 +58,7 @@ public class ConfuseRecoveringStatusHandler implements StatusHandler <ConfuseRec
 		if (nextStatus != null) {
 			TurnNotifier.get().notifyInSeconds(60, new StatusRemover(statusList, nextStatus));
 		} else {
-			entity.sendPrivateText(NotificationType.SCENE_SETTING, "Congratulations, you have been healed and immunize from confuse for a while.");
+			entity.sendPrivateText(NotificationType.SCENE_SETTING, "Congratulations, you have been healed and immunized from confuse for a while.");
 			entity.remove("status_" + status.getName());
 			if (entity.has("status_confuse")) {
 				entity.remove("status_confuse");

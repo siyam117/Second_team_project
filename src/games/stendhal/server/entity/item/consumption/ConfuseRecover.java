@@ -22,11 +22,5 @@ public class ConfuseRecover implements Feeder{
 		player.getStatusList().inflictStatus(confuse_recoveringstatus, splitOff);
 	
 		return true;
-	
 	}
-	
-
-	
-
-	
 }
