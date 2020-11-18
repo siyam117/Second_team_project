@@ -59,12 +59,11 @@
 			<parameter name="color_method">time</parameter>
 			<parameter name="weather">varying</parameter>
 		</attributes>
+		
+	    <!-- NPCs -->
+		<configurator class-name="games.stendhal.server.maps.deniran.ReceptionistNPC" />
 
 
-		<portal x="55" y="9" ref="deniran_inn_entrance">
-			<destination zone="int_deniran_inn" ref="entrance" />
-			<attribute name="move.continuous" />
-		</portal>
 
 	</zone>
 
@@ -1329,23 +1328,31 @@
 	</zone>
 
 
-	<zone name="int_deniran_inn" file="interiors/deniran/inn.tmx">
-
-		<portal x="14" y="18" ref="entrance">
-			<destination zone="0_deniran_city_sw" ref="deniran_inn_entrance" />
-			<attribute name="move.continuous" />
-		</portal>
+	<zone name="int_deniran_hospital" file="interiors/deniran/inn.tmx">
 
 		<portal x="14" y="9" ref="downstairs">
-			<destination zone="int_deniran_inn_1" ref="upstairs" />
+			<destination zone="int_deniran_hospital_1" ref="upstairs" />
 		</portal>
+
+		<!-- NPCs -->
+		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.hospital.ReceptionistNPC"/>
+		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.hospital.PoisonNurseNPC"/>
+		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.hospital.ShockNurseNPC"/>
+		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.hospital.ConfuseNurseNPC"/>
+	
+		
 	</zone>
 
-	<zone name="int_deniran_inn_1" file="interiors/deniran/inn_1.tmx">
+	<zone name="int_deniran_hospital_1" file="interiors/deniran/inn_1.tmx">
 
 		<portal x="14" y="9" ref="upstairs">
-			<destination zone="int_deniran_inn" ref="downstairs" />
+			<destination zone="int_deniran_hospital" ref="downstairs" />
 		</portal>
+		
+		<!-- NPCs -->
+		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.hospital.PoisonDoctorNPC"/>
+		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.hospital.ShockDoctorNPC"/>
+		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.hospital.ConfuseDoctorNPC"/>		
 
 	</zone>
 

@@ -21,8 +21,23 @@ public final class FeederFactory {
 	private static Immunizer immunizer = new Immunizer();
 	private static Poisoner poisoner = new Poisoner();
 	private static Eater eater = new Eater();
+	private static PoisonRecover poison_recover = new PoisonRecover();
+	private static ConfuseRecover confuse_recover = new ConfuseRecover();
+	private static ShockRecover shock_recover = new ShockRecover();
 
 	public static Feeder get(final ConsumableItem item) {
+		if (item.getItemSubclass().equals("poison_healer")) {
+			return poison_recover;
+		}
+		
+		if (item.getItemSubclass().equals("shock_healer")) {
+			return shock_recover;
+		}
+		
+		if (item.getItemSubclass().equals("confuse_healer")) {
+			return confuse_recover;
+		}
+
 		if (item instanceof StatusHealer) {
 			return immunizer;
 		}
