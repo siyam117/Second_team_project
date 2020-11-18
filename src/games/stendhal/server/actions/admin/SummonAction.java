@@ -28,6 +28,7 @@ import games.stendhal.server.entity.Entity;
 import games.stendhal.server.entity.creature.BabyDragon;
 import games.stendhal.server.entity.creature.Cat;
 import games.stendhal.server.entity.creature.Creature;
+import games.stendhal.server.entity.creature.FarmBot;
 import games.stendhal.server.entity.creature.PurpleDragon;
 import games.stendhal.server.entity.creature.RaidCreature;
 import games.stendhal.server.entity.creature.Sheep;
@@ -103,6 +104,9 @@ public class SummonAction extends AdministrationAction {
 					final Sheep sheep = new Sheep(player);
 					found(type, sheep);
 				}
+			} else if ("farmbot".equals(type)) {
+				final FarmBot farmBot = new FarmBot(player);
+				found(type, farmBot);
 			}
 		}
 	}
