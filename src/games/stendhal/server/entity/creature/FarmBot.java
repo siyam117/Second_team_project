@@ -80,15 +80,15 @@ public class FarmBot extends DomesticAnimal {
 	}
 
 	protected PassiveEntityRespawnPoint getNearestHarvestableCrop() {
-		int range = this.getMovementRange();
+		int range = getMovementRange();
 		double squaredDistance = range * range;
 
 		PassiveEntityRespawnPoint chosen = null;
 
 		for (final PassiveEntityRespawnPoint crop : getZone().getPlantGrowers()) {
-			if (capableOfHarvesting(crop) && (this.squaredDistance(crop) < squaredDistance)) {
+			if (capableOfHarvesting(crop) && (squaredDistance(crop) < squaredDistance)) {
 				chosen = crop;
-				squaredDistance = this.squaredDistance(crop);
+				squaredDistance = squaredDistance(crop);
 			}
 		}
 		return chosen;
@@ -98,11 +98,14 @@ public class FarmBot extends DomesticAnimal {
 		if (crop == null) {
 			return false;
 		}
-		return this.nextTo(crop) && capableOfHarvesting(crop);
+		return nextTo(crop) && capableOfHarvesting(crop);
 	}
 
 	protected boolean capableOfHarvesting(PassiveEntityRespawnPoint crop) {
 		if(!crop.has("ripeness")) {
+			return false;
+		}
+		if (!(crop instanceof GrainField || crop instanceof VegetableGrower)) {
 			return false;
 		}
 		if (crop.getInt("ripeness") != crop.getInt("max_ripeness")) {
@@ -126,7 +129,6 @@ public class FarmBot extends DomesticAnimal {
 			clearPath();
 		} else {
 			if(crop != null) {
-				clearPath();
 				setMovement(crop, 0, 0, getMovementRange());
 			}
 		}
