@@ -327,7 +327,17 @@ public class EntityFactoryTest {
 				StackableItem.class, en.getClass());
 
 	}
+	
+	@Test
+	public final void stackableItemWand() {
+		RPObject rp = new MockRPObject("item", "wand of sluggishness");
+		IEntity en = EntityFactory.createEntity(rp);
+		assertNotNull("entity should be created", en);
+		assertEquals("we should have created a UseableItem by now",
+				Item.class, en.getClass());
+		}
 
+	
 	@Test
 	public final void portal() {
 		final RPObject rp = new MockRPObject("portal", null);

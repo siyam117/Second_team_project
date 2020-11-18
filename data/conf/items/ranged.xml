@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <items xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="stendhal ../items.xsd ">
+
   <item name="wooden bow">
     <type class="ranged" subclass="wooden_bow" tileid="-1"/>
     <description>You see a wooden bow. With this in one hand, and wooden arrows in the other, you may be able to attack from a distance.</description>
@@ -126,8 +127,8 @@
       <slot name="trade"/>
     </equipable>
   </item>
-
-<!-- disabled
+  
+ <!-- disabled
   <item name="auto crossbow">
     <type class="ranged" subclass="auto_crossbow" tileid="-1" />
     <description>This auto crossbow allows for rapid fire. But its poor craftsmanship makes it feel as if it might break in your hands.</description>
