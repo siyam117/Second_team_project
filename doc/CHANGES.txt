@@ -2,6 +2,34 @@ Changelog
 ---------
 ---------
 
+1.36uom
+
+*world*
+- map changes:
+  - deniran inn changed into deniran hospital
+- new creatures:
+  - farmbot
+- new items:
+  - confuse healer
+  - poison healer
+  - shock healer
+  - wand of sluggishness
+- new NPCs:
+  - Confuse Doctor
+  - Poison Doctor
+  - Shock Doctor
+  - Confuse Nurse
+  - Poison Nurse
+  - Shock Nurse
+  - Receptionist
+- new quests:
+  - ConfuseHealerForPlayer
+  - PoisonHealerForPlayer
+  - ShockHealerForPlayer
+*graphics*
+- new sprite for recover status
+- new sprite for wand of sluggishness
+
 1.35uom
 
 *bug fixes*

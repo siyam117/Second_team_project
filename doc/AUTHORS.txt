@@ -170,22 +170,29 @@ Authors of Stendhal are:
 - Angela Popovska
   · Bugs fixer
   · Testing
+  · Coder (implement wand of sluggishness)
 - Lyra O'Leary
   · Bugs fixer
   · Testing
+  · Coder (implement wand of sluggishness)
 - Matthew Horrocks
   · Bugs fixer
   · Testing
+  · Coder (implement harvest droid)
 - Karin Tange
   · Bugs fixer
   · Testing
+  · Coder (implement deniran hospital)
 - Siyam Muhammad
   · Bugs fixer
   · Testing
+  · Coder (implement harvest droid)
 - Kaiwei Guo
   · Bugs fixer
   · Testing
   · Release 1.35uom
+  · Coder (implement deniran hospital)
+  · Release 1.36uom
 
 We also thank many who have contributed to Stendhal by providing patches,
 which the rest of the team commited on their behalf.
