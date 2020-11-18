@@ -2,11 +2,11 @@ package games.stendhal.server.entity.creature;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -58,8 +58,6 @@ public class FarmBotTest {
 	
 	@Test
 	public void testGetNearestHarvestableCrop() {
-		assertNull(farmBot.getNearestHarvestableCrop());
-		
 		final PassiveEntityRespawnPoint cropClose = PassiveEntityRespawnPointFactory.create("vegetable", 1, null, 0, 0);
 		assertNotNull(cropClose);
 		cropClose.onFruitPicked(null);
@@ -78,6 +76,17 @@ public class FarmBotTest {
 		
 		cropClose.setToFullGrowth();
 		assertSame(cropClose, farmBot.getNearestHarvestableCrop());
+	}
+	
+	@Test
+	public void testGetNearestOnlyReturnsCrop() {
+		assertNull(farmBot.getNearestHarvestableCrop());
+		
+		final PassiveEntityRespawnPoint nonCrop = PassiveEntityRespawnPointFactory.create("fruits", 7, null, 0, 0);
+		assertNotNull(nonCrop);
+		zone.add(nonCrop);
+		
+		assertNull(farmBot.getNearestHarvestableCrop());
 	}
 	
 	@Test
@@ -122,12 +131,12 @@ public class FarmBotTest {
 	
 	@Test
 	public void testHarvestsCrops() {
-		PassiveEntityRespawnPoint crop = PassiveEntityRespawnPointFactory.create("vegetable", 2, null, 0, 0);
+		final VegetableGrower crop = (VegetableGrower) PassiveEntityRespawnPointFactory.create("vegetable", 2, null, 0, 0);
 		zone.add(crop);
 		
 		crop.setToFullGrowth();
 		farmBot.logic();
 		
-		assertThat(crop.getInt("ripeness"),is(0));
+		assertThat(crop.getInt("ripeness"), is(0));
 	}
 }
