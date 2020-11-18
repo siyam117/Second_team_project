@@ -1,13 +1,12 @@
 package games.stendhal.server.entity.creature;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 
 import games.stendhal.server.core.engine.SingletonRepository;
+import games.stendhal.server.entity.mapstuff.spawner.GrainField;
 import games.stendhal.server.entity.mapstuff.spawner.PassiveEntityRespawnPoint;
+import games.stendhal.server.entity.mapstuff.spawner.VegetableGrower;
 import games.stendhal.server.entity.player.Player;
-import marauroa.common.game.Definition.Type;
 import marauroa.common.game.RPClass;
 import marauroa.common.game.RPObject;
 import marauroa.common.game.SyntaxException;
@@ -15,14 +14,11 @@ import marauroa.common.game.SyntaxException;
 public class FarmBot extends DomesticAnimal {
 	
 	private static final Logger logger = Logger.getLogger(FarmBot.class);
-	private List<String> tools;
-	
 	
 	public static void generateRPClass() {
 		try {
 			final RPClass farmBot = new RPClass("farmbot");
 			farmBot.isA("creature");
-			farmBot.addAttribute("weight", Type.BYTE);
 		} catch (final SyntaxException e) {
 			logger.error("cannot generate RPClass", e);
 		}
@@ -117,18 +113,30 @@ public class FarmBot extends DomesticAnimal {
 		return true;
 	}
 	
+	@Override
 	public void logic() {
 		super.logic();
+		logger.debug("");
 		PassiveEntityRespawnPoint crop = getNearestHarvestableCrop();
-		 if(canHarvest(crop)) {
-			// crop.onUsed(this);
-			 this.setMovement(crop,0,0,this.getMovementRange());
-			 this.applyMovement();
-		 }
-		
+		if(canHarvest(crop)) {
+			if (crop instanceof VegetableGrower) {
+				((VegetableGrower) crop).onUsed(this);
+			}
+			if (crop instanceof GrainField) {
+				((GrainField) crop).onUsed(this);
+			}
+			clearPath();
+		} else {
+			if(crop != null) {
+				clearPath();
+				setMovement(crop, 0, 0, getMovementRange());
+			}
+		}
+		applyMovement();
+		notifyWorldAboutChanges();
 	}
 
-		/**
+	/**
 	 * Does this domestic animal take part in combat?
 	 *
 	 * @return true, if it can be attacked by creatures, false otherwise

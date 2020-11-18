@@ -19,7 +19,6 @@ import games.stendhal.server.entity.mapstuff.spawner.PassiveEntityRespawnPoint;
 import games.stendhal.server.entity.mapstuff.spawner.PassiveEntityRespawnPointFactory;
 import games.stendhal.server.entity.mapstuff.spawner.VegetableGrower;
 import games.stendhal.server.maps.MockStendlRPWorld;
-import utilities.PlayerTestHelper;
 import utilities.RPClass.CreatureTestHelper;
 import utilities.RPClass.GrowingPassiveEntityRespawnPointTestHelper;
 
@@ -30,10 +29,8 @@ public class FarmBotTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		MockStendlRPWorld.get();
-		PlayerTestHelper.generatePlayerRPClasses();
 		CreatureTestHelper.generateRPClasses();
 		GrowingPassiveEntityRespawnPointTestHelper.generateRPClasses();
-		FarmBot.generateRPClass();
 	}
 
 	@AfterClass
@@ -46,8 +43,6 @@ public class FarmBotTest {
 		MockStendlRPWorld.reset();
 		this.zone = new StendhalRPZone("testzone", 10, 10);
 		MockStendlRPWorld.get().addRPZone(zone);
-		
-//		final Player bob = PlayerTestHelper.createPlayer("bob");
 		
 		this.farmBot = new FarmBot();
 		farmBot.setPosition(0, 0);
