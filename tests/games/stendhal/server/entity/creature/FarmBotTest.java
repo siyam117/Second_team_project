@@ -93,11 +93,6 @@ public class FarmBotTest {
 		crop.setToFullGrowth();
 		assertTrue(farmBot.canHarvest(crop));
 		assertTrue(crop.onUsed(farmBot));
-		
-		crop.setPosition(10, 10);
-		crop.setToFullGrowth();
-		assertFalse(farmBot.canHarvest(crop));
-		assertFalse(crop.onUsed(farmBot));
 	}
 	
 	@Test
@@ -113,9 +108,14 @@ public class FarmBotTest {
 		crop.setToFullGrowth();
 		assertTrue(farmBot.canHarvest(crop));
 		assertTrue(crop.onUsed(farmBot));
-		
+	}
+	
+	@Test
+	public void testCannotHarvestWhenFarAway() {
+		final VegetableGrower crop = (VegetableGrower) PassiveEntityRespawnPointFactory.create("vegetable", 2, null, 0, 0);
 		crop.setPosition(10, 10);
 		crop.setToFullGrowth();
+	
 		assertFalse(farmBot.canHarvest(crop));
 		assertFalse(crop.onUsed(farmBot));
 	}
